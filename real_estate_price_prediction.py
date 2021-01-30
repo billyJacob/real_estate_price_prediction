@@ -1,5 +1,7 @@
 import csv
+import pandas as pd
 
+#this section of the code is just to view the records in the csv_file
 
 with open('Real_estate.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
