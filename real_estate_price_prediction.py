@@ -20,7 +20,7 @@ correlations = data.corr()
 print(correlations)
 
 # next we need to remove the latitude and longitude columns as they dont make any direct significant impact on the house price
-data = data.drop(labels=["X5 latitude","X6 longitude", "No"], axis=1)
+data = data.drop(labels=["X5 latitude","X6 longitude", "No","X1 transaction date"], axis=1)
 
 # the describe function is used to get the full description of the dataset.
 correlations = data.corr()
@@ -28,11 +28,11 @@ print(correlations)
 
 
 # the first four columns 0 - 3 are the features for predicting the house price
-features = data.iloc[:,[0,3]].values
-print(features)
+features = data.iloc[:,[0,1,2]].values
+print(features[1][1])
 
 
-label = data.iloc[:,4].values
+label = data.iloc[:,3].values
 
 X_train, X_test, y_train, y_test = train_test_split(features, label, test_size = 0.2, random_state = 0)
 #X_train= X_train.reshape(-1, 1)
@@ -48,3 +48,9 @@ regr.fit(X_train,y_train)
 y_pred = regr.predict(X_test)
 
 print(y_pred)
+print(y_test)
+
+
+
+mse = mean_squared_error(y_test,y_pred) 
+print(mse)
